@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Books.Api\Books.Api.csproj" />
+    <ProjectReference Include="..\Commons\Commons.csproj" />
   </ItemGroup>
 
   <ItemGroup>

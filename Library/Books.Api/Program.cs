@@ -1,5 +1,8 @@
 using Books.Api.Models;
 using Books.Api.Repositories;
+using Books.Api.Repositories.Interfaces;
+using Books.Api.Services;
+using Books.Api.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IBookRepository, BookRepository>();
+builder.Services.AddSingleton<IAuthorRepository, AuthorRepository>();
 builder.Services.AddTransient<IBookService, BookService>();
 
 builder.Services.AddDbContextFactory<LibraryContext>(options =>

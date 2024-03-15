@@ -13,6 +13,25 @@ public class BookRepository : IBookRepository
         _libraryContextFactory = libraryContextFactory;
     }
 
+    public async Task<Book> AddNewBookAsync(BookDto book, long authorId, LibraryContext? libraryContext = null)
+    {
+        var context = libraryContext ?? await _libraryContextFactory.CreateDbContextAsync();
+
+        var toAdd = new Book()
+        {
+            Title = book.Title,
+            Price = book.Price,
+            Bookstand = book.Bookstand,
+            Shelf = book.Shelf,
+            AuthorId = authorId,
+        };
+
+        await context.AddAsync(toAdd);
+        await context.SaveChangesAsync();
+
+        return toAdd;
+    }
+
     public async Task<List<Book>> GetBooksAsync()
     {
         using var context = await _libraryContextFactory.CreateDbContextAsync();
